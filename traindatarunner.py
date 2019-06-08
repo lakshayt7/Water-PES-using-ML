@@ -1,6 +1,8 @@
 import math
 import numpy as np
 import random
+import os
+import subprocess
 
 a0 = 0.96
 theta = (104.5/360)*2*math.pi
@@ -26,16 +28,31 @@ def H2O2(r, th, ph, alpha):
     H1 = H1 + O
     H2 = H2 + O
     return O, H1, H2
+def pratom(f, A):
+    f.write("%f\t%f\t%f\n" % (A[0], A[1], A[2]))
 O1 = [0,                  0,                  0]
 H1 = [a0,                 0,                  0]
 H2 = [a0*math.cos(theta), a0*math.sin(theta), 0]
-for i in range(1000):
+os.chdir("/home//top//Documents")
+for i in range(5):
     r = random.uniform(1, 10)
     t = random.uniform(0, math.pi)
     p = random.uniform(0, math.pi * 2)
     alpha = [random.uniform(0, math.pi * 2), random.uniform(0, math.pi * 2), random.uniform(0, math.pi * 2)]
     O2, H3, H4 = H2O2(r, t, p, alpha)
-    #f = open("water.com", "w+")
-    #f.write("%mem=8GB\n%CHK=water.chk\n#n B3LYP/aug-cc-pVTZ SP\n\n0 1\nO          ")
-    #for v in O1: 
-    print(O1, H1, H2, O2, H3, H4)
+    f = open("water.com", "w+")
+    f.write("%mem=8GB\n%CHK=water.chk\n#n B3LYP/aug-cc-pVTZ SP\n\n0 1\n")
+    f.write("O\t")
+    pratom(f, O1)
+    f.write("H\t")
+    pratom(f, H1)
+    f.write("H\t")
+    pratom(f, H2)
+    f.write("O\t")
+    pratom(f, O2)
+    f.write("O\t")
+    pratom(f, H3)
+    f.write("O\t")
+    pratom(f, H4)
+    f.close()
+
