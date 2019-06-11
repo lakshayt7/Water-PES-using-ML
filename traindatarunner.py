@@ -4,7 +4,7 @@ import random
 import os
 import subprocess
 
-a0 = 0.96
+a0 =  0.957835
 theta = (104.5/360)*2*math.pi
 def RotMatrix(a1, a2, a3) :
     Rx  = np.array([[1,         0,                  0                   ],
@@ -29,11 +29,22 @@ def H2O2(r, th, ph, alpha):
     H2 = H2 + O
     return O, H1, H2
 def pratom(f, A):
-    f.write("%f\t%f\t%f\n" % (A[0], A[1], A[2]))
+    if(A[0]>=0):
+        f.write(" %.5f       " % (A[0]))
+    else:
+        f.write("%.5f       " % (A[0]))
+    if(A[1]>=0):
+        f.write(" %.5f       " % (A[1]))
+    else:
+        f.write("%.5f       " % (A[1]))
+    if(A[2]>=0):
+        f.write(" %.5f       \n" % (A[2]))
+    else:
+        f.write("%.5f       \n" % (A[2]))
 O1 = [0,                  0,                  0]
 H1 = [a0,                 0,                  0]
 H2 = [a0*math.cos(theta), a0*math.sin(theta), 0]
-os.chdir("/home//top//Documents")
+#os.chdir("/home//top//Documents")
 for i in range(5):
     r = random.uniform(1, 10)
     t = random.uniform(0, math.pi)
@@ -41,18 +52,20 @@ for i in range(5):
     alpha = [random.uniform(0, math.pi * 2), random.uniform(0, math.pi * 2), random.uniform(0, math.pi * 2)]
     O2, H3, H4 = H2O2(r, t, p, alpha)
     f = open("water.com", "w+")
-    f.write("%mem=8GB\n%CHK=water.chk\n#n B3LYP/aug-cc-pVTZ SP\n\n0 1\n")
-    f.write("O\t")
+    f.write("%mem=8GB\n%CHK=water.chk\n#n B3LYP/aug-cc-pVTZ SP\n\n water_2\n\n0 1\n")
+    f.write("O         ")
     pratom(f, O1)
-    f.write("H\t")
+    f.write("H         ")
     pratom(f, H1)
-    f.write("H\t")
+    f.write("H         ")
     pratom(f, H2)
-    f.write("O\t")
+    f.write("O         ")
     pratom(f, O2)
-    f.write("O\t")
+    f.write("H         ")
     pratom(f, H3)
-    f.write("O\t")
+    f.write("H         ")
     pratom(f, H4)
-    f.close()
+    cmd = "G09run water2.com"
+    subprocess.call(cmd, shell=True)
 
+f.close()
