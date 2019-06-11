@@ -51,7 +51,7 @@ for i in range(5):
     p = random.uniform(0, math.pi * 2)
     alpha = [random.uniform(0, math.pi * 2), random.uniform(0, math.pi * 2), random.uniform(0, math.pi * 2)]
     O2, H3, H4 = H2O2(r, t, p, alpha)
-    f = open("water.com", "w+")
+    f = open("water%d.com" % (i), "w+")
     f.write("%mem=8GB\n%CHK=water.chk\n#n B3LYP/aug-cc-pVTZ SP\n\n water_2\n\n0 1\n")
     f.write("O         ")
     pratom(f, O1)
@@ -68,5 +68,4 @@ for i in range(5):
     f.write("\n")
     cmd = "G09run water.com"
     subprocess.call(cmd, shell=True)
-
-f.close()
+    f.close()
