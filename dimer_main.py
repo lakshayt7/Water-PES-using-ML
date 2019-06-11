@@ -10,20 +10,45 @@ def number(s, i):
 n = 5
 key = ['X', 'Y', 'Z']
 Dx, Dy, Dz = [], [], []
+Qxx, Qyy, Qzz, Qxy, Qxz, Qyz = [], [], [], [], [], []
+Qxxx, Qyyy, Qzzz, Qxyy, Qxxy, Qxxz, Qxzz, Qyzz, Qyyz, Qxyz = [], [], [], [], [], [], [], [], [], []
+
 for i in range(100):
     f = open("water" + str(i) + ".log", "rt")
     contents = f.read()
     f.close()
     d = contents.find('Dipole')
     i = contents.find('X', d)
-    mono = ''
     Dx.append(number(contents, i))
     i = contents.find('Y', d)
-    mono = ''
     Dy.append(number(contents, i))
     i = contents.find('Z', d)
-    mono = ''
     Dz.append(number(contents, i))
-print(Dy)
+    d = contents.find('Quadrupole')
+    i = contents.find('XX', d)
+    Qxx.append(number(contents, i))
+    i = contents.find('YY', d)
+    Qyy.append(number(contents, i))
+    i = contents.find('ZZ', d)
+    Qzz.append(number(contents, i))
+    i = contents.find('XY', d)
+    Qxy.append(number(contents, i))
+    i = contents.find('XZ', d)
+    Qxz.append(number(contents, i))
+    i = contents.find('YZ', d)
+    Qyz.append(number(contents, i))
+    d = contents.find('Octapole')
+    i = contents.find('XXX', d)
+    Qxxx.append(number(contents, i))
+    i = contents.find('YYY', d)
+    Qyyy.append(number(contents, i))
+    i = contents.find('ZZZ', d)
+    Qzzz.append(number(contents, i))
+    i = contents.find('XYY', d)
+    QXXY.append(number(contents, i))
+    i = contents.find('XXY', d)
+    Qxxy.append(number(contents, i))
+    
+print(Qxy)
 
 
