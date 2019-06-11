@@ -38,9 +38,9 @@ def pratom(f, A):
     else:
         f.write("%.5f       " % (A[1]))
     if(A[2]>=0):
-        f.write(" %.5f       \n" % (A[2]))
+        f.write(" %.5f\n" % (A[2]))
     else:
-        f.write("%.5f       \n" % (A[2]))
+        f.write("%.5f\n" % (A[2]))
 O1 = [0,                  0,                  0]
 H1 = [a0,                 0,                  0]
 H2 = [a0*math.cos(theta), a0*math.sin(theta), 0]
@@ -65,7 +65,8 @@ for i in range(5):
     pratom(f, H3)
     f.write("H         ")
     pratom(f, H4)
-    cmd = "G09run water2.com"
+    f.write("\n")
+    cmd = "G09run water.com"
     subprocess.call(cmd, shell=True)
 
 f.close()
