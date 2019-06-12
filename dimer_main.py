@@ -45,10 +45,19 @@ for i in range(100):
     i = contents.find('ZZZ', d)
     Qzzz.append(number(contents, i))
     i = contents.find('XYY', d)
-    QXXY.append(number(contents, i))
+    Qxyy.append(number(contents, i))
     i = contents.find('XXY', d)
     Qxxy.append(number(contents, i))
-    
+    i = contents.find('XXZ', d)
+    Qxxz.append(number(contents, i))
+    i = contents.find('XZZ', d)
+    Qxzz.append(number(contents, i))
+    i = contents.find('YZZ', d)
+    Qyzz.append(number(contents, i))
+    i = contents.find('YYZ', d)
+    Qyyz.append(number(contents, i))
+    i = contents.find('XYZ', d)
+    Qxyz.append(number(contents, i))
 print(Qxy)
 
 
