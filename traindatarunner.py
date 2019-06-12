@@ -45,8 +45,10 @@ O1 = [0,                  0,                  0]
 H1 = [a0,                 0,                  0]
 H2 = [a0*math.cos(theta), a0*math.sin(theta), 0]
 #os.chdir("/home//top//Documents")
-for i in range(5):
-    r = random.uniform(1, 10)
+n = 5
+I = np.zeros((n, 6))
+for i in range(n):
+    r = random.uniform(1, 8)
     t = random.uniform(0, math.pi)
     p = random.uniform(0, math.pi * 2)
     alpha = [random.uniform(0, math.pi * 2), random.uniform(0, math.pi * 2), random.uniform(0, math.pi * 2)]
@@ -67,5 +69,8 @@ for i in range(5):
     pratom(f, H4)
     f.write("\n")
     cmd = "G09run water.com"
-    subprocess.call(cmd, shell=True)
+    #subprocess.call(cmd, shell=True)
     f.close()
+    print([r, t, p, alpha[0], alpha[1], alpha[2]])
+    I[i] = [r, t, p, alpha[0], alpha[1], alpha[2]]
+np.savetxt("Input.csv", I, delimiter = ",")
