@@ -45,7 +45,7 @@ O1 = [0,                  0,                  0]
 H1 = [a0,                 0,                  0]
 H2 = [a0*math.cos(theta), a0*math.sin(theta), 0]
 #os.chdir("/home//top//Documents")
-n = 5
+n = 1000
 I = np.zeros((n, 6))
 for i in range(n):
     r = random.uniform(1, 8)
@@ -54,7 +54,7 @@ for i in range(n):
     alpha = [random.uniform(0, math.pi * 2), random.uniform(0, math.pi * 2), random.uniform(0, math.pi * 2)]
     O2, H3, H4 = H2O2(r, t, p, alpha)
     f = open("water%d.com" % (i), "w+")
-    f.write("%mem=8GB\n%CHK=water.chk\n#n B3LYP/aug-cc-pVTZ SP\n\n water_2\n\n0 1\n")
+    f.write("%NProcShared=4\n%mem=8GB\n%CHK=water.chk\n#n B3LYP/aug-cc-pVTZ SP\n\n water_2\n\n0 1\n")
     f.write("O         ")
     pratom(f, O1)
     f.write("H         ")
@@ -69,8 +69,7 @@ for i in range(n):
     pratom(f, H4)
     f.write("\n")
     f.close()
-    cmd = "G09run water.com"
-    #subprocess.call(cmd, shell=True)
-    print([r, t, p, alpha[0], alpha[1], alpha[2]])
+    cmd = "G09run water"+ str(i)+ ".com"
+    subprocess.call(cmd, shell=True)
     I[i] = [r, t, p, alpha[0], alpha[1], alpha[2]]
 np.savetxt("Input.csv", I, delimiter = ",")
