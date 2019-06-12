@@ -68,9 +68,9 @@ for i in range(n):
     f.write("H         ")
     pratom(f, H4)
     f.write("\n")
+    f.close()
     cmd = "G09run water.com"
     #subprocess.call(cmd, shell=True)
-    f.close()
     print([r, t, p, alpha[0], alpha[1], alpha[2]])
     I[i] = [r, t, p, alpha[0], alpha[1], alpha[2]]
 np.savetxt("Input.csv", I, delimiter = ",")
