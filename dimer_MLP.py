@@ -53,7 +53,7 @@ optimiser = tf.train.AdamOptimizer(0.005).minimize(MSE)
 y_pred=tf.clip_by_value(y_pred, 0.0000001,0.9999999)
 accuracy /= tf.reduce_sum(y, 0)
 init=tf.global_variables_initializer()
-ith tf.device('/gpu:0'):
+with tf.device('/gpu:0'):
     runs = 3000
     with tf.Session() as sess:
         sess.run(init)
