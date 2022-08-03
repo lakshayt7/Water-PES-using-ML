@@ -1,1 +1,0 @@
-800 new points
